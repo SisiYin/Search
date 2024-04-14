@@ -1,4 +1,3 @@
-//window.history.pushState(null, '', '/foodhub');
 const BACK_END_URL = 'http://localhost:3001'
 
 
