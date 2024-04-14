@@ -4,16 +4,22 @@ const BACK_END_URL = 'http://localhost:3001'
 
 const searchList = document.querySelector('ul')
 const searchInput = document.getElementById('searchInput')
+const searchForm = document.getElementById('searchForm');
 
 const keyword = searchInput.value.trim();
-const searchResultsUrl = 'http://127.0.0.1:5500/Client/input.html/searh?keyword='+keyword;
+//const searchResultsUrl = 'http://127.0.0.1:5500/Client/input.html/searh?keyword='+keyword;
 
 const searchResult = async()=>{
   
   try {
+    const keyword = searchInput.value.trim();
+    // const response = await fetch (`${BACK_END_URL}/search?keyword=${encodeURIComponent(keyword)}`)
     const response = await fetch (BACK_END_URL + '/search?keyword='+ keyword);
-    
     const searchResults = await response.json();
+    //console.log(response.json())
+    
+    searchList.innerHTML = '';
+
     searchResults. forEach(searchResult => {
       const searchItem = document.createElement('li');
       const author = document.createElement('div');
@@ -39,23 +45,43 @@ const searchResult = async()=>{
 }
 
 
-searchInput.addEventListener('keypress',async (event) =>{
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    //const keyword = searchInput.value.trim();
-    // const searchResultsUrl = `http://127.0.0.1:5500/Client/input.html/search?keyword=${keyword}`;
-    // window.location.href = searchResultsUrl;
-    searchResult();
+searchForm.addEventListener('submit',async (event) => {
+  // console.log(searchInput.value.trim())
+  // console.log(searchForm)
+
+  event.preventDefault()
+  //const keyword = searchInput.value.trim();
+  //console.log(keyword)
+  searchResult();
+  // searchInput.value = '';
+  // searchInput.focus();
+    
+  // const searchResultsUrl = `http://127.0.0.1:5500/Client/input.html/search?keyword=${keyword}`;
+  // window.location.href = searchResultsUrl;
+  
+  //searchResult(keyword);
     //searchInput.value = '';
     //searchInput.focus();
     // addCommentToPage(commentInput.value);
   // } catch (error) {
   //   console.error(error);
     //window.location.href = 'searchResult.html';
-  } 
+  
 })
 
+window.onload = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const keyword = urlParams.get('keyword');
+  if (keyword) {
+      searchInput.value = keyword;
+      await searchResult();
+  }
+};
 
+
+//app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   const categoryIcons = document.querySelectorAll('.category-icons img');
