@@ -9,23 +9,14 @@
   <title>Search</title>
 </head>
 <body>
-  <form id='searchForm' >
-    <div>
-      <input type="search" id="searchInput" placeholder="Search...">
-      <button class="search-btn" >
-        <img id='glass' src="./image/3947.png_860.png" alt="search">
-      </button>
-    </div>
-  </form>
+  <button onclick="getArticles('veg')">vege</button>
+  <button onclick="getArticles('beef')">beef</button>
+  <button onclick="getArticles('dairy')">dairy</button>
 
-  <ul class="search-results">Search List</ul>
-</div>
-
-
-
+  <ul id="articleList"></ul>
 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="./searchResult.js"></script>
+  <script src="./select.js"></script>
 </body>
 </html>

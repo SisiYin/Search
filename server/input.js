@@ -61,5 +61,40 @@ app.get("/search",async(req,res)=>{
   }
 })
 
+app.get('/veg', async (req, res) => {
+  const pool = openDb();
+
+  try {
+    const result = await pool.query('SELECT * FROM post WHERE category = $1', ['veg']);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// 处理牛肉分类请求
+app.get('/beef', async (req, res) => {
+  const pool = openDb();
+
+  try {
+    const result = await pool.query('SELECT * FROM post WHERE category = $1', ['beef']);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// 处理甜品分类请求
+app.get('/dairy', async (req, res) => {
+  const pool = openDb();
+
+  try {
+    const result = await pool.query('SELECT * FROM post WHERE category = $1', ['dairy']);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 app.listen(port);

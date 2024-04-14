@@ -1,12 +1,38 @@
-const search = () => {
-  const searchbox = document.getElementById("search-item").ariaValueMax.toUpperCase();
-  const storeitems = document.getElementById('article-list')
-  const article = document.querySelectorAll('.article')
-  const pname = document.getElementsByTagName('h2')
+const BACK_END_URL = 'http://localhost:3001';
 
-  
-}
+    async function getArticles(category) {
+      try {
+        const response = await fetch(`${BACK_END_URL}/${category}`);
+        const selectResults = await response.json();
+        displayArticles(selectResults);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
 
+    function displayArticles(selectResults) {
+      const searchList = document.getElementById('articleList');
+      searchList.innerHTML = ''; // 清空之前的文章列表
+
+      selectResults.forEach(selectResult => {
+      const searchItem = document.createElement('li');
+      const author = document.createElement('div');
+      author.textContent = selectResult.username;
+      const title = document.createElement('div');
+      title.textContent = selectResult.title;
+      const description = document.createElement('div')
+      description.textContent = selectResult.description;
+      const rate = document.createElement('div')
+      rate.textContent = selectResult.rate;
+      
+      searchItem.appendChild(title);
+      searchItem.appendChild(author);
+      searchItem.appendChild(description);
+      searchItem.appendChild(rate);
+      
+      searchList.appendChild(searchItem);
+      });
+    }
 
 // const BACK_END_URL = 'http://localhost:3001'
 

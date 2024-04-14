@@ -53,8 +53,8 @@ searchForm.addEventListener('submit',async (event) => {
   //const keyword = searchInput.value.trim();
   //console.log(keyword)
   searchResult();
-  // searchInput.value = '';
-  // searchInput.focus();
+  //searchInput.value = '';
+  searchInput.focus();
     
   // const searchResultsUrl = `http://127.0.0.1:5500/Client/input.html/search?keyword=${keyword}`;
   // window.location.href = searchResultsUrl;
