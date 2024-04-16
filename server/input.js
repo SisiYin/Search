@@ -72,7 +72,7 @@ app.get('/veg', async (req, res) => {
   }
 });
 
-// 处理牛肉分类请求
+// beef
 app.get('/beef', async (req, res) => {
   const pool = openDb();
 
@@ -84,7 +84,7 @@ app.get('/beef', async (req, res) => {
   }
 });
 
-// 处理甜品分类请求
+// dairy
 app.get('/dairy', async (req, res) => {
   const pool = openDb();
 
