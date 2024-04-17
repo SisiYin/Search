@@ -65,7 +65,7 @@ app.get('/veg', async (req, res) => {
   const pool = openDb();
 
   try {
-    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE category = $1) p join account a on a.account_id = p.account_id', ['veg']);
+    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE $1 = ANY(category)) p join account a on a.account_id = p.account_id', ['veg']);
     res.status(200).json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -77,7 +77,7 @@ app.get('/beef', async (req, res) => {
   const pool = openDb();
 
   try {
-    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE category = $1) p join account a on a.account_id = p.account_id', ['beef']);
+    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE $1 = ANY(category)) p join account a on a.account_id = p.account_id', ['beef']);
     res.status(200).json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -89,7 +89,7 @@ app.get('/dairy', async (req, res) => {
   const pool = openDb();
 
   try {
-    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE category = $1) p join account a on a.account_id = p.account_id', ['dairy']);
+    const result = await pool.query('Select a.username,p.title,p.rate,p.photo_data,p.description from (SELECT * FROM post WHERE $1 = ANY(category)) p join account a on a.account_id = p.account_id', ['dairy']);
     res.status(200).json(result.rows);
   } catch (error) {
     res.status(500).json({ error: error.message });
